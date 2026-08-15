@@ -1,21 +1,21 @@
-
-using System.Security.Cryptography.X509Certificates;
-
 namespace Biblioteca.Dominio;
 
 public abstract class ItemAcervo
 {
- 
- protected ItemAcervo(string título, string autor)
+    public ItemAcervo(string titulo, string autor)
     {
-
-        if(string.IsNullOrEmpty(título))
+        if(string.IsNullOrWhiteSpace(titulo))
         {
-            throw new ExcecaoDominio("O título não pode ser vazio.");
+            throw new InvalidOperationException("O título não pode ser vazio.");
         }
-        Titulo = título;
+        if(string.IsNullOrWhiteSpace(autor))
+        {
+            throw new InvalidOperationException("O autor não pode ser vazio.");
+        }
+        Titulo = titulo;
         Autor = autor;
     }
+
 
  public string Titulo { get; set; }   = string.Empty;
 
@@ -31,4 +31,23 @@ public abstract class ItemAcervo
  {
   return diasAtraso >= 0 ? diasAtraso * MultaDeAtraso : 0;
  }
+
+ public void MarcarComoDevolvido()
+ {
+    if(Disponibilidade)
+    {
+        throw new ExcecaoDominio("Não está emprestado");
+    }
+   Disponibilidade = true;  
+ }
+
+ public void MarcarComoEmprestado()
+ {    
+    if(!Disponibilidade)
+    {
+        throw new ExcecaoDominio("Não está emprestado");
+    }
+    Disponibilidade = false;
+ }
+
 }
