@@ -12,6 +12,9 @@ public class Emprestimo
 
     public DateTime PrazoLimite { get; }
 
+    public DateTime? DataDevolucao { get; private set; }
+    public decimal? MultaFinal { get; private set; }
+
     public Emprestimo(ItemAcervo item, Leitor Leitor)
     {
         item.MarcarComoEmprestado();
@@ -31,6 +34,7 @@ public class Emprestimo
     public void RegistrarDevolucao()
     {
         Item.MarcarComoDevolvido();
+
     }
 
 
