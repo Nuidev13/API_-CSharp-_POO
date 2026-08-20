@@ -72,3 +72,4 @@ Console.WriteLine($"Multa consultada depois: R$ {multaDepois}");
 Console.WriteLine(multaNaDevolucao == multaDepois
     ? "OK: o valor continua o mesmo, mesmo com o tempo passando."
     : "BUG: o valor mudou depois da devolução!");
+
