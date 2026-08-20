@@ -61,17 +61,12 @@ var elias = new Leitor("Sr. Elias", new DateTime(1960, 1, 1));
 var revistaFinal = new Revista("É o fim", "Autor END...");
 var emprestimoElias = elias.RealizarEmprestimo(revistaFinal);
 
-// Observação: como PrazoLimite depende de DateTime.Today no momento da criação,
-// não dá pra "voltar no tempo" num console simples pra simular um atraso real
-// sem mudar a modelagem (isso pediria injetar um "relógio" no domínio).
-// O que este cenário prova é a parte que realmente importa pro bug relatado:
-// depois de devolvido, MultaAtual passa a ler o valor TRAVADO em MultaFinal,
-// e não recalcula mais nada com base em "hoje" — não importa quando alguém perguntar.
+
 elias.RegistrarDevolucao(emprestimoElias);
 decimal multaNaDevolucao = emprestimoElias.MultaAtual;
 Console.WriteLine($"Multa registrada no momento da devolução: R$ {multaNaDevolucao}");
 
-// "Duas semanas depois", alguém pergunta de novo:
+
 decimal multaDepois = emprestimoElias.MultaAtual;
 Console.WriteLine($"Multa consultada depois: R$ {multaDepois}");
 Console.WriteLine(multaNaDevolucao == multaDepois

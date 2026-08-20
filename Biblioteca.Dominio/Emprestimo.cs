@@ -1,4 +1,4 @@
-using System.Reflection.Metadata.Ecma335;
+    using System.Reflection.Metadata.Ecma335;             
 
 namespace Biblioteca.Dominio;
 
@@ -20,7 +20,6 @@ public class Emprestimo
         item.MarcarComoEmprestado();
         Item = item;
         PrazoLimite = DataEmprestimo.AddDays(item.PrazoDevolucao);
-
     }
     public decimal MultaAtual => Item.CalcularMulta(QtDiasAtrasados);
     public int QtDiasAtrasados
