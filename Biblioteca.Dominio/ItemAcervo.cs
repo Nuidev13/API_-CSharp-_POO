@@ -1,7 +1,16 @@
+using System.Data.Common;
+using System.Dynamic;
+
 namespace Biblioteca.Dominio;
 
 public abstract class ItemAcervo
 {
+
+
+    private static int _proximoId = 1;
+
+    public int Id {get;}
+
     public ItemAcervo(string titulo, string autor)
     {
         if(string.IsNullOrWhiteSpace(titulo))
@@ -14,7 +23,10 @@ public abstract class ItemAcervo
         }
         Titulo = titulo;
         Autor = autor;
+        Id = _proximoId++;
     }
+
+
 
 
  public string Titulo { get; set; }   = string.Empty;
